@@ -10,7 +10,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap"
         rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -29,18 +28,11 @@
             <div id="selector" class="model-selector">
                 <!-- Chips added via JS -->
             </div>
-        
-            <div class="chart-grid">
-                <div class="chart-card">
-                    <canvas id="comparisonChart"></canvas>
-                </div>
-                <div class="chart-card">
-                    <div id="unified-table-container" class="table-container">
-                        <!-- Table added via JS -->
-                    </div>
-                </div>
+            
+            <div id="unified-table-container" class="table-container">
+                <!-- Table added via JS -->
             </div>
-        </div>
+            </div>
         
         <div id="sources-view" class="dashboard-section hidden">
             <h2>Hugging Face Sources</h2>
@@ -190,57 +182,7 @@
                     table.appendChild(thead);
                     table.appendChild(tbody);
                     container.innerHTML = '';
-                    container.appendChild(table);
-
-                    updateChart();
-                }
-
-                function updateChart() {
-                    const ctx = document.getElementById('comparisonChart').getContext('2d');
-                    const selectedArray = Array.from(selectedModels);
-
-                    // Pick top 6 common benchmarks for chart
-                    const commonBenchmarks = ["MMLU", "MMLU-Pro", "GSM8K", "MATH", "HumanEval", "GPQA-Diamond", "IFEval", "HLE-Full"]
-                        .filter(b => normalizedData[b]);
-
-                    const datasets = selectedArray.map((m, i) => {
-                        const colors = [
-                            '#8b5cf6', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#ec4899'
-                        ];
-                        return {
-                            label: m,
-                            data: commonBenchmarks.map(b => normalizedData[b][m] || 0),
-                            borderColor: colors[i % colors.length],
-                            backgroundColor: colors[i % colors.length] + '22',
-                            borderWidth: 3,
-                            pointBackgroundColor: colors[i % colors.length],
-                        };
-                    });
-
-                    if (chart) chart.destroy();
-
-                    chart = new Chart(ctx, {
-                        type: 'radar',
-                        data: {
-                            labels: commonBenchmarks,
-                            datasets: datasets
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            scales: {
-                                r: {
-                                    angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                                    pointLabels: { color: '#94a3b8', font: { size: 12 } },
-                                    ticks: { display: false, backdropColor: 'transparent' }
-                                }
-                            },
-                            plugins: {
-                                legend: { position: 'bottom', labels: { color: '#f8fafc', padding: 20 } }
-                            }
-                        }
-                    });
+                container.appendChild(table);
                 }
 
                 function renderSources() {
