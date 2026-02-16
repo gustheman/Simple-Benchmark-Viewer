@@ -119,7 +119,7 @@ def is_benchmark_table(rows):
             
     return False
 
-def process_readme(file_path):
+def process_readme(file_path, owner=None, official_name=None):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
@@ -130,27 +130,80 @@ def process_readme(file_path):
     for mt in md_tables:
         parsed = parse_markdown_table(mt)
         if is_benchmark_table(parsed):
+            # Identify benchmark column
+            bench_col = None
+            if parsed:
+                headers = list(parsed[0].keys())
+                # Priority for benchmark column names
+                for candidate in ["Benchmark (Metric)", "Benchmark", "benchmark", "Evaluation Source"]:
+                    if candidate in headers:
+                        bench_col = candidate
+                        break
+                if not bench_col and "" in headers:
+                    bench_col = ""
+            
+            # Add metadata to each row if provided
+            for row in parsed:
+                if bench_col is not None:
+                    row['__benchmark'] = row.get(bench_col, "")
+                if owner:
+                    row['__owner'] = owner
+                if official_name:
+                    row['__official_name'] = official_name
             all_table_data.append(parsed)
             
     # Extract HTML tables
     html_tables = extract_html_tables(content)
     for ht in html_tables:
         if is_benchmark_table(ht):
+            # Identify benchmark column
+            bench_col = None
+            if ht:
+                headers = list(ht[0].keys())
+                for candidate in ["Benchmark (Metric)", "Benchmark", "benchmark", "Evaluation Source"]:
+                    if candidate in headers:
+                        bench_col = candidate
+                        break
+                if not bench_col and "" in headers:
+                    bench_col = ""
+
+            # Add metadata to each row if provided
+            for row in ht:
+                if bench_col is not None:
+                    row['__benchmark'] = row.get(bench_col, "")
+                if owner:
+                    row['__owner'] = owner
+                if official_name:
+                    row['__official_name'] = official_name
             all_table_data.append(ht)
             
     return all_table_data
 
 if __name__ == "__main__":
+    # Mapping of filename to source metadata
+    source_metadata = {
+        "deepseek_readme.md": {"owner": "DeepSeek-V3", "name": "DeepSeek-V3"},
+        "qwen_readme.md": {"owner": "Qwen3.5-397B-A17B", "name": "Qwen3.5-397B-A17B"},
+        "glm5_readme.md": {"owner": "GLM-5", "name": "GLM-5"},
+        "minimax_readme.md": {"owner": "MiniMax-M2.5", "name": "MiniMax-M2.5"},
+        "kimi_k2.5_readme.md": {"owner": "Kimi-K2.5", "name": "Kimi-K2.5"}
+    }
+    
     results = {}
     
     # Process all .md files in the directory
     for filename in os.listdir('.'):
         if filename.endswith('.md') and filename != 'README.md': # Exclude project README if it exists
             print(f"Processing {filename}...")
-            tables = process_readme(filename)
-            results[filename] = tables
-            print(f"Found {len(tables)} benchmark tables in {filename}")
+            meta = source_metadata.get(filename, {"owner": None, "name": filename})
+            owner = meta["owner"]
+            display_name = meta["name"]
+            
+            tables = process_readme(filename, owner=owner, official_name=display_name)
+            results[display_name] = tables
+            print(f"Found {len(tables)} benchmark tables in {filename} (Official: {display_name}, Owner: {owner})")
 
     with open('benchmarks.json', 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2)
     print("Results saved to benchmarks.json")
+

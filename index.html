@@ -53,6 +53,8 @@
             let models = new Set();
             let selectedModels = new Set();
             let chart = null;
+                                    let officialModels = new Set();
+                                    const officialOwners = new Set(["DeepSeek", "Qwen", "THUDM", "MiniMax", "Moonshot"]);
 
             async function init() {
             try {
@@ -69,15 +71,16 @@
             }
         }
 
+
             function processData() {
                 for (const [file, tables] of Object.entries(rawData)) {
                     const fileName = file.replace('_readme.md', '').toUpperCase();
                     tables.forEach(table => {
-                        const localModels = Object.keys(table[0]).filter(k => k !== "" && k.toLowerCase() !== "benchmark" && k.toLowerCase() !== "architecture" && k.toLowerCase() !== "# activated params" && k.toLowerCase() !== "# total params");
+                        const localModels = Object.keys(table[0]).filter(k => k !== "" && k !== "__owner" && k !== "__official_name" && k !== "__benchmark" && k.toLowerCase() !== "benchmark" && k.toLowerCase() !== "architecture" && k.toLowerCase() !== "# activated params" && k.toLowerCase() !== "# total params");
 
                         table.forEach(row => {
-                            // Benchmark name is usually in index 0 or key "" or "benchmark"
-                            const benchmarkName = row[""] || row["Benchmark"] || row["benchmark"];
+                            // Benchmark name is canonicalized in backend as __benchmark
+                            const benchmarkName = row["__benchmark"] || row[""] || row["Benchmark"] || row["benchmark"];
                             if (!benchmarkName || benchmarkName === "---") return;
 
                             if (!normalizedData[benchmarkName]) normalizedData[benchmarkName] = {};
@@ -90,13 +93,19 @@
                                 if (!isNaN(parseFloat(value))) {
                                     normalizedData[benchmarkName][m] = parseFloat(value);
                                     models.add(m);
+
+                                    // Tag as official if its name exactly matches the designated official name for this source
+                                    const officialNameForSource = row["__official_name"];
+                                    if (m === officialNameForSource) {
+                                        officialModels.add(m);
+                                    }
                                 }
                             }
                         });
                     });
                 });
             }
-                        
+
             // Initial selection: first 4 models
             Array.from(models).slice(0, 4).forEach(m => selectedModels.add(m));
         }
@@ -105,21 +114,21 @@
                 const selector = document.getElementById('selector');
                 Array.from(models).sort().forEach(m => {
                     const chip = document.createElement('div');
-                    chip.className = `model-chip ${selectedModels.has(m) ? 'active' : ''}`;
+                    chip.className = `model-chip ${selectedModels.has(m) ? 'active' : ''} ${officialModels.has(m) ? 'official' : ''}`;
                     chip.textContent = m;
                     chip.onclick = () => {
                         if (selectedModels.has(m)) {
                             selectedModels.delete(m);
                             chip.classList.remove('active');
-                    } else {
-                        selectedModels.add(m);
-                        chip.classList.add('active');
-                    }
-                    updateDashboard();
-                };
-                selector.appendChild(chip);
-            });
-        }
+                        } else {
+                            selectedModels.add(m);
+                            chip.classList.add('active');
+                        }
+                        updateDashboard();
+                    };
+                    selector.appendChild(chip);
+                });
+            }
 
             function renderUnified() {
                 const container = document.getElementById('unified-table-container');
@@ -137,7 +146,12 @@
 
                     selectedArray.forEach(m => {
                         const th = document.createElement('th');
-                        th.textContent = m;
+                        if (officialModels.has(m)) {
+                            th.className = 'official-model';
+                            th.innerHTML = `${m} <span class="official-badge">Official</span>`;
+                        } else {
+                            th.textContent = m;
+                        }
                         hRow.appendChild(th);
                     });
                     thead.appendChild(hRow);
@@ -191,12 +205,24 @@
 
                     for (const [filename, tables] of Object.entries(rawData)) {
                         const section = document.createElement('div');
-                        section.style.marginBottom = '40px';
+                        section.className = 'source-section';
 
+                        const header = document.createElement('div');
+                        header.className = 'source-header';
+
+                        const icon = document.createElement('span');
+                        icon.className = 'toggle-icon';
+                        icon.innerHTML = '▼';
+                        
                         const title = document.createElement('h3');
                         title.textContent = filename.replace('_readme.md', '').toUpperCase();
-                        title.style.color = 'var(--accent)';
-                        section.appendChild(title);
+
+                        header.appendChild(icon);
+                        header.appendChild(title);
+                        section.appendChild(header);
+
+                        const content = document.createElement('div');
+                        content.className = 'source-content';
 
                         tables.forEach(tableData => {
                             const wrap = document.createElement('div');
@@ -204,7 +230,8 @@
                             wrap.style.marginTop = '20px';
 
                             const table = document.createElement('table');
-                            const headers = Object.keys(tableData[0]);
+                            const allHeaders = Object.keys(tableData[0]);
+                            const headers = allHeaders.filter(h => h !== "__owner" && h !== "__benchmark" && h !== "__official_name" && h !== "__official_bame");
 
                     const thead = document.createElement('thead');
                     const hr = document.createElement('tr');
@@ -229,8 +256,15 @@
                     table.appendChild(thead);
                     table.appendChild(tbody);
                     wrap.appendChild(table);
-                    section.appendChild(wrap);
+                            content.appendChild(wrap);
                 });
+
+                        section.appendChild(content);
+
+                        header.onclick = () => {
+                            section.classList.toggle('collapsed');
+                        };
+
                 container.appendChild(section);
             }
         }
