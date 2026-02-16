@@ -3,95 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM Benchmark Comparison</title>
+    <title>LLM Benchmark Universe</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>LLM Benchmark Comparison</h1>
-            <p class="subtitle">Easily compare reported benchmarks from top providers</p>
+            <h1>LLM Benchmark Universe</h1>
+            <p class="subtitle">Unified comparison engine for the frontier AI models.</p>
         </header>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="unified">Unified Comparison</div>
+            <div class="tab" data-tab="sources">Source Tables</div>
+        </div>
         
-        <div id="dashboard">
-            <div class="loading">Loading benchmark data...</div>
+        <div id="unified-view" class="dashboard-section">
+            <h2>Model Comparison</h2>
+            <div id="selector" class="model-selector">
+                <!-- Chips added via JS -->
+            </div>
+        
+            <div class="chart-grid">
+                <div class="chart-card">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div id="unified-table-container" class="table-container">
+                        <!-- Table added via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="sources-view" class="dashboard-section hidden">
+            <h2>Hugging Face Sources</h2>
+            <div id="source-tables">
+                <!-- Raw tables from JSON -->
+            </div>
+        </div>
+        
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Scanning benchmark reports...</p>
         </div>
     </div>
 
     <script>
-        async function loadBenchmarks() {
-            const dashboard = document.getElementById('dashboard');
+            let rawData = null;
+            let normalizedData = {}; // benchmark -> model -> value
+            let models = new Set();
+            let selectedModels = new Set();
+            let chart = null;
+
+            async function init() {
             try {
                 const response = await fetch('benchmarks.json');
-                if (!response.ok) throw new Error('Failed to load benchmarks.json');
-                const data = await response.json();
-                
-                dashboard.innerHTML = '';
-                
-                for (const [filename, tables] of Object.entries(data)) {
-                    const section = document.createElement('div');
-                    section.className = 'model-section';
-                    
-                    const title = document.createElement('h2');
-                    title.textContent = filename.replace('_readme.md', '').toUpperCase();
-                    section.appendChild(title);
-                    
-                    if (tables.length === 0) {
-                        const noData = document.createElement('p');
-                        noData.textContent = 'No benchmark tables found.';
-                        noData.style.color = 'var(--text-secondary)';
-                        section.appendChild(noData);
-                    } else {
-                        tables.forEach((tableData, index) => {
-                            if (tableData.length === 0) return;
-                            
-                            const canvas = document.createElement('div');
-                            canvas.className = 'canvas-container';
-                            
-                            const table = document.createElement('table');
-                            const thead = document.createElement('thead');
-                            const tbody = document.createElement('tbody');
-                            
-                            // Headers
-                            const headerRow = document.createElement('tr');
-                            const headers = Object.keys(tableData[0]);
-                            headers.forEach(h => {
-                                const th = document.createElement('th');
-                                th.textContent = h;
-                                headerRow.appendChild(th);
-                            });
-                            thead.appendChild(headerRow);
-                            
-                            // Rows
-                            tableData.forEach(rowData => {
-                                const row = document.createElement('tr');
-                                headers.forEach(h => {
-                                    const td = document.createElement('td');
-                                    td.textContent = rowData[h] || '--';
-                                    row.appendChild(td);
-                                });
-                                tbody.appendChild(row);
-                            });
-                            
-                            table.appendChild(thead);
-                            table.appendChild(tbody);
-                            canvas.appendChild(table);
-                            section.appendChild(canvas);
-                        });
-                    }
-                    
-                    dashboard.appendChild(section);
-                }
+                rawData = await response.json();
+                processData();
+                renderSelector();
+                renderUnified();
+                renderSources();
+                document.getElementById('loading').classList.add('hidden');
             } catch (err) {
-                dashboard.innerHTML = `<div class="error">Error: ${err.message}</div>`;
-                console.error(err);
+                console.error("Failed to load benchmarks:", err);
+                document.getElementById('loading').innerHTML = `<p style="color: #ef4444">Error loading data: ${err.message}</p>`;
             }
         }
 
-        window.addEventListener('DOMContentLoaded', loadBenchmarks);
+            function processData() {
+                for (const [file, tables] of Object.entries(rawData)) {
+                    const fileName = file.replace('_readme.md', '').toUpperCase();
+                    tables.forEach(table => {
+                        const localModels = Object.keys(table[0]).filter(k => k !== "" && k.toLowerCase() !== "benchmark" && k.toLowerCase() !== "architecture" && k.toLowerCase() !== "# activated params" && k.toLowerCase() !== "# total params");
+
+                        table.forEach(row => {
+                            // Benchmark name is usually in index 0 or key "" or "benchmark"
+                            const benchmarkName = row[""] || row["Benchmark"] || row["benchmark"];
+                            if (!benchmarkName || benchmarkName === "---") return;
+
+                            if (!normalizedData[benchmarkName]) normalizedData[benchmarkName] = {};
+
+                        localModels.forEach(m => {
+                            let value = row[m];
+                            if (value && value !== "-" && value !== "---") {
+                                // Extract numeric value, remove footnotes
+                                value = value.replace(/[\u2020*]/g, '').trim();
+                                if (!isNaN(parseFloat(value))) {
+                                    normalizedData[benchmarkName][m] = parseFloat(value);
+                                    models.add(m);
+                                }
+                            }
+                        });
+                    });
+                });
+            }
+                        
+            // Initial selection: first 4 models
+            Array.from(models).slice(0, 4).forEach(m => selectedModels.add(m));
+        }
+
+            function renderSelector() {
+                const selector = document.getElementById('selector');
+                Array.from(models).sort().forEach(m => {
+                    const chip = document.createElement('div');
+                    chip.className = `model-chip ${selectedModels.has(m) ? 'active' : ''}`;
+                    chip.textContent = m;
+                    chip.onclick = () => {
+                        if (selectedModels.has(m)) {
+                            selectedModels.delete(m);
+                            chip.classList.remove('active');
+                    } else {
+                        selectedModels.add(m);
+                        chip.classList.add('active');
+                    }
+                    updateDashboard();
+                };
+                selector.appendChild(chip);
+            });
+        }
+
+            function renderUnified() {
+                const container = document.getElementById('unified-table-container');
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+
+                    const selectedArray = Array.from(selectedModels);
+
+                    // Header
+                    const hRow = document.createElement('tr');
+                    const thB = document.createElement('th');
+                    thB.textContent = "Benchmark";
+                    hRow.appendChild(thB);
+
+                    selectedArray.forEach(m => {
+                        const th = document.createElement('th');
+                        th.textContent = m;
+                        hRow.appendChild(th);
+                    });
+                    thead.appendChild(hRow);
+
+                    // Data Rows
+                    Object.entries(normalizedData).forEach(([bName, mData]) => {
+                        const bModels = Object.keys(mData);
+                        const showRow = selectedArray.some(m => bModels.includes(m));
+                        if (!showRow) return;
+
+                        const row = document.createElement('tr');
+                        const tdB = document.createElement('td');
+                        tdB.className = "benchmark-name";
+                        tdB.textContent = bName;
+                        row.appendChild(tdB);
+
+                        // Find best score for highlighting
+                        let bestVal = -1;
+                        selectedArray.forEach(m => {
+                            const val = mData[m];
+                            if (val !== undefined && val > bestVal) bestVal = val;
+                        });
+
+                        selectedArray.forEach(m => {
+                            const td = document.createElement('td');
+                            td.className = "score-value";
+                            const val = mData[m];
+                            if (val !== undefined) {
+                                td.textContent = val;
+                                if (val === bestVal && bestVal !== -1) {
+                                    td.innerHTML = `<span class="best-score">${val}</span>`;
+                                }
+                            } else {
+                                td.textContent = "--";
+                                td.style.opacity = "0.3";
+                            }
+                            row.appendChild(td);
+                        });
+                        tbody.appendChild(row);
+                    });
+
+                    table.appendChild(thead);
+                    table.appendChild(tbody);
+                    container.innerHTML = '';
+                    container.appendChild(table);
+
+                    updateChart();
+                }
+
+                function updateChart() {
+                    const ctx = document.getElementById('comparisonChart').getContext('2d');
+                    const selectedArray = Array.from(selectedModels);
+
+                    // Pick top 6 common benchmarks for chart
+                    const commonBenchmarks = ["MMLU", "MMLU-Pro", "GSM8K", "MATH", "HumanEval", "GPQA-Diamond", "IFEval", "HLE-Full"]
+                        .filter(b => normalizedData[b]);
+
+                    const datasets = selectedArray.map((m, i) => {
+                        const colors = [
+                            '#8b5cf6', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#ec4899'
+                        ];
+                        return {
+                            label: m,
+                            data: commonBenchmarks.map(b => normalizedData[b][m] || 0),
+                            borderColor: colors[i % colors.length],
+                            backgroundColor: colors[i % colors.length] + '22',
+                            borderWidth: 3,
+                            pointBackgroundColor: colors[i % colors.length],
+                        };
+                    });
+
+                    if (chart) chart.destroy();
+
+                    chart = new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: commonBenchmarks,
+                            datasets: datasets
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                r: {
+                                    angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    pointLabels: { color: '#94a3b8', font: { size: 12 } },
+                                    ticks: { display: false, backdropColor: 'transparent' }
+                                }
+                            },
+                            plugins: {
+                                legend: { position: 'bottom', labels: { color: '#f8fafc', padding: 20 } }
+                            }
+                        }
+                    });
+                }
+
+                function renderSources() {
+                    const container = document.getElementById('source-tables');
+                    container.innerHTML = '';
+
+                    for (const [filename, tables] of Object.entries(rawData)) {
+                        const section = document.createElement('div');
+                        section.style.marginBottom = '40px';
+
+                        const title = document.createElement('h3');
+                        title.textContent = filename.replace('_readme.md', '').toUpperCase();
+                        title.style.color = 'var(--accent)';
+                        section.appendChild(title);
+
+                        tables.forEach(tableData => {
+                            const wrap = document.createElement('div');
+                            wrap.className = 'table-container';
+                            wrap.style.marginTop = '20px';
+
+                            const table = document.createElement('table');
+                            const headers = Object.keys(tableData[0]);
+
+                    const thead = document.createElement('thead');
+                    const hr = document.createElement('tr');
+                    headers.forEach(h => {
+                        const th = document.createElement('th');
+                        th.textContent = h;
+                        hr.appendChild(th);
+                    });
+                    thead.appendChild(hr);
+                    
+                    const tbody = document.createElement('tbody');
+                    tableData.forEach(rowData => {
+                        const tr = document.createElement('tr');
+                        headers.forEach(h => {
+                            const td = document.createElement('td');
+                            td.textContent = rowData[h] || '--';
+                            tr.appendChild(td);
+                        });
+                        tbody.appendChild(tr);
+                    });
+
+                    table.appendChild(thead);
+                    table.appendChild(tbody);
+                    wrap.appendChild(table);
+                    section.appendChild(wrap);
+                });
+                container.appendChild(section);
+            }
+        }
+
+            function updateDashboard() {
+                renderUnified();
+            }
+
+    // Tab Switching
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.onclick = () => {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const target = tab.getAttribute('data-tab');
+            if (target === 'unified') {
+                document.getElementById('unified-view').classList.remove('hidden');
+                document.getElementById('sources-view').classList.add('hidden');
+            } else {
+                document.getElementById('unified-view').classList.add('hidden');
+                document.getElementById('sources-view').classList.remove('hidden');
+            }
+            };
+        });
+
+            init();
     </script>
 </body>
 </html>
