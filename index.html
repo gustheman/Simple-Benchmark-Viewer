@@ -85,8 +85,8 @@
                         localModels.forEach(m => {
                             let value = row[m];
                             if (value && value !== "-" && value !== "---") {
-                                // Extract numeric value, remove footnotes
-                                value = value.replace(/[\u2020*]/g, '').trim();
+                                // Extract numeric value, remove footnotes, currency, and commas
+                                value = value.replace(/[\u2020*$,]/g, '').trim();
                                 if (!isNaN(parseFloat(value))) {
                                     normalizedData[benchmarkName][m] = parseFloat(value);
                                     models.add(m);
