@@ -127,8 +127,13 @@
                 });
             }
 
-            // Initial selection: first 4 models
-            Array.from(models).slice(0, 4).forEach(m => selectedModels.add(m));
+                // Initial selection: Qwen 3.5 models
+                const qwenModels = Array.from(models).filter(m => m.includes("Qwen3.5"));
+                if (qwenModels.length > 0) {
+                    qwenModels.forEach(m => selectedModels.add(m));
+                } else {
+                    Array.from(models).slice(0, 4).forEach(m => selectedModels.add(m));
+            }
         }
 
             function renderSelector() {
