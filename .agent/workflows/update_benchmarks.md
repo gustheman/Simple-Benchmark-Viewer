@@ -1,27 +1,25 @@
 ---
-description: How to update the LLM Benchmark Viewer with new models using Hugging Face links
+description: /update_benchmarks [Hugging Face URL] - Add a new model from a Hugging Face link
 ---
 
 Follow these steps to add a new model's benchmarks to the dashboard directly from a Hugging Face URL.
 
-1.  **Obtain the Hugging Face Model URL** (e.g., `https://huggingface.co/Qwen/Qwen3.5-35B-A3B`).
-2.  **Download and process the content**:
+1.  **Extract the raw README content** from the provided `{{URL}}`.
+2.  **Save the content** as a `.md` file in the root directory (e.g., based on the model name).
+3.  **Process and Extract**:
     // turbo
     ```bash
-    # Step: download the README and save it to the project root
-    # Step: run the extraction script
     python3 extract_benchmarks.py
     ```
-3.  **Run the research script** to normalize names and update the dashboard data:
+4.  **Normalize and Research**:
     // turbo
     ```bash
     python3 research_benchmarks.py
     ```
-4.  **Check for normalization warnings** in the terminal output. If a benchmark name isn't recognized, add it to the `NORMALIZATION_MAP` in `research_benchmarks.py`.
-5.  **Verify the changes in your browser** (the local `index.html`).
-6.  **Commit and push the new data**:
+5.  **Verify the results** in the local `index.html`.
+6.  **Commit and push**:
     ```bash
     git add .
-    git commit -m "Add benchmarks for [Model Name]"
+    git commit -m "Add benchmarks for model from {{URL}}"
     git push origin main
     ```
