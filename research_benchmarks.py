@@ -135,6 +135,126 @@ COMMON_BENCHMARKS = {
     "HLE": {
         "url": "https://humaneval.github.io/hle",
         "desc": "Humanity's Last Exam: A benchmark designed to be extremely difficult for current AI models."
+    },
+    "WideSearch": {
+        "url": "https://arxiv.org/abs/2508.07999",
+        "desc": "Benchmarking Agentic Broad Info-Seeking: Evaluates agents on finding entangled info on the internet."
+    },
+    "Codeforces": {
+        "url": "https://arxiv.org/abs/2501.01257",
+        "desc": "CodeElo: Evaluates competition-level code generation using problems from Codeforces with human-comparable Elo ratings."
+    },
+    "OJBench": {
+        "url": "https://github.com/He-Ren/OJBench",
+        "desc": "A Competition Level Code Benchmark for LLMs with 232 programming competition problems."
+    },
+    "ZeroBench": {
+        "url": "https://arxiv.org/abs/2502.09696",
+        "desc": "An Impossible Visual Benchmark for Contemporary Large Multimodal Models."
+    },
+    "MathVision": {
+        "url": "https://mathllm.github.io/mathvision/",
+        "desc": "A dataset of 3,040 math problems with visual contexts from real math competitions."
+    },
+    "OmniDocBench 1.5": {
+        "url": "https://github.com/opendatalab/OmniDocBench",
+        "desc": "A comprehensive benchmark for document understanding and parsing."
+    },
+    "Terminal Bench 2.0": {
+        "url": "https://www.tbench.ai/",
+        "desc": "Evaluates AI agents' ability to operate a computer via terminal for real-world technical tasks."
+    },
+    "SWE-bench Pro": {
+        "url": "https://github.com/scaleapi/SWE-bench_Pro-os",
+        "desc": "Evaluates LLMs on long-horizon software engineering tasks across professional repositories."
+    },
+    "IMO-AnswerBench": {
+        "url": "https://imobench.github.io/",
+        "desc": "Part of IMO-Bench, evaluating LLMs on International Mathematical Olympiad level problems."
+    },
+    "DynaMath": {
+        "url": "https://github.com/DynaMath/DynaMath",
+        "desc": "A dynamic visual math benchmark evaluating the robustness of mathematical reasoning in VLMs."
+    },
+    "CharXiv": {
+        "url": "https://charxiv.github.io",
+        "desc": "A benchmark for character-based visual reasoning in multimodal models."
+    },
+    "OSWorld-Verified": {
+        "url": "https://github.com/xlang-ai/OSWorld",
+        "desc": "A scalable real computer environment for evaluating multimodal agents across operating systems."
+    },
+    "MMStar": {
+        "url": "https://github.com/mmstar-benchmark/mmstar",
+        "desc": "Evaluates whether Large Vision-Language Models are truly relying on visual capabilities."
+    },
+    "RealWorldQA": {
+        "url": "https://huggingface.co/datasets/xai-org/RealworldQA",
+        "desc": "Designed by xAI to evaluate real-world spatial understanding in multimodal models."
+    },
+    "MLVU": {
+        "url": "https://github.com/JUNJIE99/MLVU",
+        "desc": "Multi-task Long Video Understanding: Benchmarking models on diverse long-video tasks."
+    },
+    "OCRBench": {
+        "url": "https://github.com/Yuliang-Liu/MultimodalOCR",
+        "desc": "A comprehensive evaluation benchmark for Optical Character Recognition in multimodal models."
+    },
+    "FullStackBench": {
+        "url": "https://github.com/bytedance/FullStackBench",
+        "desc": "Evaluating LLMs as full-stack coders across 16 programming languages and 3,000 samples."
+    },
+    "VlmsAreBlind": {
+        "url": "https://vlmsareblind.github.io",
+        "desc": "BlindTest: Evaluates whether Vision-Language Models are \"blind\" to certain visual features."
+    },
+    "Seal-0": {
+        "url": "https://arxiv.org/abs/2506.01062",
+        "desc": "Part of SealQA, evaluating reasoning under noisy, conflicting, and ambiguous search results."
+    },
+    "VITA-Bench": {
+        "url": "https://vitabench.github.io",
+        "desc": "Benchmarking LLM agents with versatile interactive tasks in real-world applications."
+    },
+    "DeepPlanning": {
+        "url": "https://arxiv.org/abs/2601.18137",
+        "desc": "Benchmarking long-horizon agentic planning with verifiable constraints."
+    },
+    "TAU2-Bench": {
+        "url": "https://github.com/sierra-research/tau2-bench",
+        "desc": "Evaluating conversational agents in a dual-control environment."
+    },
+    "BrowseComp": {
+        "url": "https://arxiv.org/abs/2504.12516",
+        "desc": "OpenAI's benchmark for browsing agents to locate difficult-to-find information."
+    },
+    "BrowseComp-Zh": {
+        "url": "https://arxiv.org/abs/2504.19314",
+        "desc": "High-difficulty benchmark for evaluating LLM agents on the Chinese web."
+    },
+    "BabyVision": {
+        "url": "https://github.com/UniPat-AI/BabyVision",
+        "desc": "Visual Reasoning Beyond Language: Evaluates early visual development concepts in models."
+    },
+    "PolyMATH": {
+        "url": "https://arxiv.org/abs/2504.18428",
+        "desc": "Evaluating Mathematical Reasoning in Multilingual Contexts across 18 languages."
+    },
+    "WMT24++": {
+        "url": "https://huggingface.co/datasets/google/wmt24pp",
+        "desc": "Expanding the language coverage of WMT24 to 55 languages and dialects."
+    },
+    "WinoGrande (Acc.)": {
+        "url": "https://arxiv.org/abs/1907.10641",
+        "desc": "A large-scale dataset for commonsense reasoning, designed to be more adversarial than the original Winograd Schema Challenge."
+    },
+    "ARC-Easy (Acc.)": {
+        "url": "https://arxiv.org/abs/1803.05457",
+        "desc": "AI2 Reasoning Challenge: The easier subset of school-level multiple-choice science questions."
+    },
+    "TriviaQA (EM)": {
+        "url": "https://arxiv.org/abs/1705.03551",
+        "desc": "A large scale reading comprehension dataset which includes over 650K question-answer-evidence triples."
     }
 }
 

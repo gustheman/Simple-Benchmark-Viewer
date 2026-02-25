@@ -5197,24 +5197,24 @@ var rawData = {
       "desc": null
     },
     "BabyVision": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/UniPat-AI/BabyVision",
+      "desc": "Visual Reasoning Beyond Language: Evaluates early visual development concepts in models."
     },
     "BrowseComp": {
-      "url": null,
-      "desc": null
+      "url": "https://arxiv.org/abs/2504.12516",
+      "desc": "OpenAI's benchmark for browsing agents to locate difficult-to-find information."
     },
     "BrowseComp (w/ Context Manage)": {
-      "url": null,
-      "desc": null
+      "url": "https://arxiv.org/abs/2504.12516",
+      "desc": "OpenAI's benchmark for browsing agents to locate difficult-to-find information."
     },
     "BrowseComp(Agent Swarm)": {
       "url": null,
       "desc": null
     },
     "BrowseComp-Zh": {
-      "url": null,
-      "desc": null
+      "url": "https://arxiv.org/abs/2504.19314",
+      "desc": "High-difficulty benchmark for evaluating LLM agents on the Chinese web."
     },
     "C-Eval": {
       "url": "https://arxiv.org/abs/2305.08322",
@@ -5257,8 +5257,8 @@ var rawData = {
       "desc": null
     },
     "CharXiv": {
-      "url": null,
-      "desc": null
+      "url": "https://charxiv.github.io",
+      "desc": "A benchmark for character-based visual reasoning in multimodal models."
     },
     "Chinese": {
       "url": null,
@@ -5269,8 +5269,8 @@ var rawData = {
       "desc": null
     },
     "Codeforces": {
-      "url": null,
-      "desc": null
+      "url": "https://arxiv.org/abs/2501.01257",
+      "desc": "CodeElo: Evaluates competition-level code generation using problems from Codeforces with human-comparable Elo ratings."
     },
     "CountBench": {
       "url": null,
@@ -5285,16 +5285,16 @@ var rawData = {
       "desc": null
     },
     "DeepPlanning": {
-      "url": null,
-      "desc": null
+      "url": "https://arxiv.org/abs/2601.18137",
+      "desc": "Benchmarking long-horizon agentic planning with verifiable constraints."
     },
     "DeepSearchQA": {
       "url": null,
       "desc": null
     },
     "DynaMath": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/DynaMath/DynaMath",
+      "desc": "A dynamic visual math benchmark evaluating the robustness of mathematical reasoning in VLMs."
     },
     "ERQA": {
       "url": null,
@@ -5313,12 +5313,12 @@ var rawData = {
       "desc": null
     },
     "FullStackBench (EN)": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/bytedance/FullStackBench",
+      "desc": "Evaluating LLMs as full-stack coders across 16 programming languages and 3,000 samples."
     },
     "FullStackBench (ZH)": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/bytedance/FullStackBench",
+      "desc": "Evaluating LLMs as full-stack coders across 16 programming languages and 3,000 samples."
     },
     "GPQA": {
       "url": "https://arxiv.org/abs/2311.12022",
@@ -5393,8 +5393,8 @@ var rawData = {
       "desc": "Instruction Following Evaluation: Focuses on objective constraints (e.g., 'no more than 400 words', 'use specific format')."
     },
     "IMO-AnswerBench": {
-      "url": null,
-      "desc": null
+      "url": "https://imobench.github.io/",
+      "desc": "Part of IMO-Bench, evaluating LLMs on International Mathematical Olympiad level problems."
     },
     "INCLUDE": {
       "url": null,
@@ -5445,12 +5445,12 @@ var rawData = {
       "desc": null
     },
     "MLVU": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/JUNJIE99/MLVU",
+      "desc": "Multi-task Long Video Understanding: Benchmarking models on diverse long-video tasks."
     },
     "MLVU (M-Avg)": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/JUNJIE99/MLVU",
+      "desc": "Multi-task Long Video Understanding: Benchmarking models on diverse long-video tasks."
     },
     "MMBenchEN-DEV-v1.1": {
       "url": null,
@@ -5489,8 +5489,8 @@ var rawData = {
       "desc": null
     },
     "MMStar": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/mmstar-benchmark/mmstar",
+      "desc": "Evaluates whether Large Vision-Language Models are truly relying on visual capabilities."
     },
     "MMVU": {
       "url": null,
@@ -5505,8 +5505,8 @@ var rawData = {
       "desc": null
     },
     "MathVision": {
-      "url": null,
-      "desc": null
+      "url": "https://mathllm.github.io/mathvision/",
+      "desc": "A dataset of 3,040 math problems with visual contexts from real math competitions."
     },
     "MathVista (mini)": {
       "url": "https://arxiv.org/abs/2310.02255",
@@ -5537,28 +5537,28 @@ var rawData = {
       "desc": null
     },
     "OCRBench": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/Yuliang-Liu/MultimodalOCR",
+      "desc": "A comprehensive evaluation benchmark for Optical Character Recognition in multimodal models."
     },
     "ODInW13": {
       "url": null,
       "desc": null
     },
     "OJBench": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/He-Ren/OJBench",
+      "desc": "A Competition Level Code Benchmark for LLMs with 232 programming competition problems."
     },
     "OJBench (cpp)": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/He-Ren/OJBench",
+      "desc": "A Competition Level Code Benchmark for LLMs with 232 programming competition problems."
     },
     "OSWorld-Verified": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/xlang-ai/OSWorld",
+      "desc": "A scalable real computer environment for evaluating multimodal agents across operating systems."
     },
     "OmniDocBench 1.5": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/opendatalab/OmniDocBench",
+      "desc": "A comprehensive benchmark for document understanding and parsing."
     },
     "PIQA": {
       "url": null,
@@ -5577,8 +5577,8 @@ var rawData = {
       "desc": "Bits Per Byte evaluation on the Pile dataset, measuring language modeling efficiency."
     },
     "PolyMATH": {
-      "url": null,
-      "desc": null
+      "url": "https://arxiv.org/abs/2504.18428",
+      "desc": "Evaluating Mathematical Reasoning in Multilingual Contexts across 18 languages."
     },
     "RACE-High": {
       "url": null,
@@ -5589,8 +5589,8 @@ var rawData = {
       "desc": null
     },
     "RealWorldQA": {
-      "url": null,
-      "desc": null
+      "url": "https://huggingface.co/datasets/xai-org/RealworldQA",
+      "desc": "Designed by xAI to evaluate real-world spatial understanding in multimodal models."
     },
     "RefCOCO": {
       "url": null,
@@ -5613,8 +5613,8 @@ var rawData = {
       "desc": null
     },
     "SWE-bench Pro": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/scaleapi/SWE-bench_Pro-os",
+      "desc": "Evaluates LLMs on long-horizon software engineering tasks across professional repositories."
     },
     "SWE-bench Verified": {
       "url": "https://www.swebench.com/",
@@ -5629,8 +5629,8 @@ var rawData = {
       "desc": null
     },
     "Seal-0": {
-      "url": null,
-      "desc": null
+      "url": "https://arxiv.org/abs/2506.01062",
+      "desc": "Part of SealQA, evaluating reasoning under noisy, conflicting, and ambiguous search results."
     },
     "SecCodeBench": {
       "url": null,
@@ -5645,16 +5645,16 @@ var rawData = {
       "desc": null
     },
     "TAU2-Bench": {
-      "url": null,
-      "desc": null
+      "url": "https://github.com/sierra-research/tau2-bench",
+      "desc": "Evaluating conversational agents in a dual-control environment."
     },
     "TIR-Bench": {
       "url": null,
       "desc": null
     },
     "Terminal Bench 2.0": {
-      "url": null,
-      "desc": null
+      "url": "https://www.tbench.ai/",
+      "desc": "Evaluates AI agents' ability to operate a computer via terminal for real-world technical tasks."
     },
     "Tool Decathlon": {
       "url": null,
@@ -5673,8 +5673,8 @@ var rawData = {
       "desc": null
     },
     "VITA-Bench": {
-      "url": null,
-      "desc": null
+      "url": "https://vitabench.github.io",
+      "desc": "Benchmarking LLM agents with versatile interactive tasks in real-world applications."
     },
     "Vending Bench 2": {
       "url": null,
@@ -5689,20 +5689,20 @@ var rawData = {
       "desc": null
     },
     "VlmsAreBlind": {
-      "url": null,
-      "desc": null
+      "url": "https://vlmsareblind.github.io",
+      "desc": "BlindTest: Evaluates whether Vision-Language Models are \"blind\" to certain visual features."
     },
     "WMT24++": {
-      "url": null,
-      "desc": null
+      "url": "https://huggingface.co/datasets/google/wmt24pp",
+      "desc": "Expanding the language coverage of WMT24 to 55 languages and dialects."
     },
     "We-Math": {
       "url": null,
       "desc": null
     },
     "WideSearch": {
-      "url": null,
-      "desc": null
+      "url": "https://arxiv.org/abs/2508.07999",
+      "desc": "Benchmarking Agentic Broad Info-Seeking: Evaluates agents on finding entangled info on the internet."
     },
     "WideSearch(item-f1 Agent Swarm)": {
       "url": null,
@@ -5721,8 +5721,8 @@ var rawData = {
       "desc": null
     },
     "ZeroBench": {
-      "url": null,
-      "desc": null
+      "url": "https://arxiv.org/abs/2502.09696",
+      "desc": "An Impossible Visual Benchmark for Contemporary Large Multimodal Models."
     },
     "ZeroBench(w/ tools)": {
       "url": null,
