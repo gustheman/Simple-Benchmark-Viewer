@@ -43,10 +43,21 @@ h1 {
 }
 
 .subtitle {
-    color: var(--text-secondary);
+    color: var(--text-dim);
     font-size: 1.25rem;
-        max-width: 600px;
-        margin: 0 auto;
+    margin-bottom: 1.5rem;
+    }
+    
+    .description {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+        line-height: 1.6;
+        color: var(--text-dim);
+        font-size: 1rem;
+    }
+    
+    .description strong {
+        color: var(--accent);
 }
 
 /* Dashboard Sections */
