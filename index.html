@@ -10,6 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap"
         rel="stylesheet">
+    <script src="benchmarks.js"></script>
 </head>
 <body>
     <div class="container">
@@ -48,18 +49,20 @@
     </div>
 
     <script>
-            let rawData = null;
-            let normalizedData = {}; // benchmark -> model -> value
+                                                        let normalizedData = {}; // benchmark -> model -> value
+                                                            let benchmarkMetadata = {}; 
             let models = new Set();
             let selectedModels = new Set();
             let chart = null;
                                     let officialModels = new Set();
                                     const officialOwners = new Set(["DeepSeek", "Qwen", "THUDM", "MiniMax", "Moonshot"]);
 
-            async function init() {
+                                    function init() {
             try {
-                const response = await fetch('benchmarks.json');
-                rawData = await response.json();
+                if (typeof rawData === 'undefined' || !rawData) {
+                    throw new Error("Benchmark data (rawData) not found. Ensure benchmarks.js is loaded.");
+                }
+                benchmarkMetadata = rawData.__benchmark_metadata || {};
                 processData();
                 renderSelector();
                 renderUnified();
@@ -74,30 +77,48 @@
 
             function processData() {
                 for (const [file, tables] of Object.entries(rawData)) {
+                    if (file === "__benchmark_metadata") continue;
                     const fileName = file.replace('_readme.md', '').toUpperCase();
                     tables.forEach(table => {
                         const localModels = Object.keys(table[0]).filter(k => k !== "" && k !== "__owner" && k !== "__official_name" && k !== "__benchmark" && k.toLowerCase() !== "benchmark" && k.toLowerCase() !== "architecture" && k.toLowerCase() !== "# activated params" && k.toLowerCase() !== "# total params");
 
                         table.forEach(row => {
-                            // Benchmark name is canonicalized in backend as __benchmark
-                            const benchmarkName = row["__benchmark"] || row[""] || row["Benchmark"] || row["benchmark"];
+                            // Priority: __benchmark (backend normalized), then other variants
+                            let benchmarkName = row["__benchmark"] || row["Benchmark (Metric)"] || row["Benchmark"] || row["benchmark"] || row[""];
                             if (!benchmarkName || benchmarkName === "---") return;
+
+                            benchmarkName = benchmarkName.trim();
+
+                            // Last-resort frontend normalization for major ones
+                            const normLower = benchmarkName.toLowerCase();
+                            if (normLower.includes("mmlu") && !normLower.includes("pro") && !normLower.includes("redux") && !normLower.includes("prox")) benchmarkName = "MMLU";
+                            else if (normLower.includes("humaneval") && !normLower.includes("verified")) benchmarkName = "HumanEval";
+                            else if (normLower.includes("gsm8k")) benchmarkName = "GSM8K";
+                            else if (normLower.includes("gpqa") && normLower.includes("diamond")) benchmarkName = "GPQA-Diamond";
+                            else if (normLower.includes("math") && (normLower === "math" || normLower.includes("(em)"))) benchmarkName = "MATH";
 
                             if (!normalizedData[benchmarkName]) normalizedData[benchmarkName] = {};
 
                         localModels.forEach(m => {
+                            const cleanM = m.replace(/[*_]/g, '').trim();
                             let value = row[m];
                             if (value && value !== "-" && value !== "---") {
                                 // Extract numeric value, remove footnotes, currency, and commas
                                 value = value.replace(/[\u2020*$,]/g, '').trim();
                                 if (!isNaN(parseFloat(value))) {
-                                    normalizedData[benchmarkName][m] = parseFloat(value);
-                                    models.add(m);
+                                    // Use cleanM as the key for all data
+                                    if (!normalizedData[benchmarkName][cleanM]) {
+                                        normalizedData[benchmarkName][cleanM] = parseFloat(value);
+                                    }
+                                    models.add(cleanM);
 
-                                    // Tag as official if its name exactly matches the designated official name for this source
+                                    // Tag as official if its name matches
                                     const officialNameForSource = row["__official_name"];
-                                    if (m === officialNameForSource) {
-                                        officialModels.add(m);
+                                    if (officialNameForSource) {
+                                        const cleanOfficial = officialNameForSource.replace(/[*_]/g, '').trim();
+                                        if (cleanM === cleanOfficial || cleanM.includes(cleanOfficial) || cleanOfficial.includes(cleanM)) {
+                                            officialModels.add(cleanM);
+                                        }
                                     }
                                 }
                             }
@@ -113,9 +134,10 @@
             function renderSelector() {
                 const selector = document.getElementById('selector');
                 Array.from(models).sort().forEach(m => {
+                    const cleanDisplay = m.replace(/[*_]/g, '').trim();
                     const chip = document.createElement('div');
                     chip.className = `model-chip ${selectedModels.has(m) ? 'active' : ''} ${officialModels.has(m) ? 'official' : ''}`;
-                    chip.textContent = m;
+                    chip.textContent = cleanDisplay;
                     chip.onclick = () => {
                         if (selectedModels.has(m)) {
                             selectedModels.delete(m);
@@ -145,12 +167,13 @@
                     hRow.appendChild(thB);
 
                     selectedArray.forEach(m => {
+                        const cleanDisplay = m.replace(/[*_]/g, '').trim();
                         const th = document.createElement('th');
                         if (officialModels.has(m)) {
                             th.className = 'official-model';
-                            th.innerHTML = `${m} <span class="official-badge">Official</span>`;
+                            th.innerHTML = `${cleanDisplay} <span class="official-badge">Official</span>`;
                         } else {
-                            th.textContent = m;
+                            th.textContent = cleanDisplay;
                         }
                         hRow.appendChild(th);
                     });
@@ -165,7 +188,37 @@
                         const row = document.createElement('tr');
                         const tdB = document.createElement('td');
                         tdB.className = "benchmark-name";
-                        tdB.textContent = bName;
+
+                        const meta = benchmarkMetadata[bName];
+                        if (meta && meta.url) {
+                            tdB.innerHTML = `<a href="${meta.url}" target="_blank">${bName}</a>`;
+                        } else {
+                            tdB.textContent = bName;
+                        }
+
+                        if (meta && meta.desc) {
+                            const helpIcon = document.createElement('span');
+                            helpIcon.className = 'help-icon';
+                            helpIcon.textContent = '?';
+                            helpIcon.onclick = (e) => {
+                                e.stopPropagation();
+                                document.querySelectorAll('.help-icon').forEach(h => {
+                                    if (h !== helpIcon) h.classList.remove('active');
+                                });
+                                helpIcon.classList.toggle('active');
+                            };
+
+                            const tooltip = document.createElement('div');
+                            tooltip.className = 'tooltip';
+                            tooltip.textContent = meta.desc;
+
+                            const container = document.createElement('div');
+                            container.className = 'tooltip-container';
+                            container.appendChild(helpIcon);
+                            container.appendChild(tooltip);
+                            tdB.appendChild(container);
+                        }
+                        
                         row.appendChild(tdB);
 
                         // Find best score for highlighting
@@ -204,6 +257,7 @@
                     container.innerHTML = '';
 
                     for (const [filename, tables] of Object.entries(rawData)) {
+                        if (filename === "__benchmark_metadata") continue;
                         const section = document.createElement('div');
                         section.className = 'source-section';
 
@@ -247,7 +301,42 @@
                         const tr = document.createElement('tr');
                         headers.forEach(h => {
                             const td = document.createElement('td');
-                            td.textContent = rowData[h] || '--';
+                            const val = rowData[h] || '--';
+
+                            // If this is the benchmark name column (usually first one or matching __benchmark)
+                            if (h === "__benchmark" || (h === headers[0] && benchmarkMetadata[val])) {
+                                const meta = benchmarkMetadata[val];
+                                if (meta && meta.url) {
+                                    td.innerHTML = `<a href="${meta.url}" target="_blank" class="benchmark-link">${val}</a>`;
+                                } else {
+                                    td.textContent = val;
+                                }
+
+                                if (meta && meta.desc) {
+                                    const helpIcon = document.createElement('span');
+                                    helpIcon.className = 'help-icon';
+                                    helpIcon.textContent = '?';
+                                    helpIcon.onclick = (e) => {
+                                        e.stopPropagation();
+                                        document.querySelectorAll('.help-icon').forEach(h => {
+                                            if (h !== helpIcon) h.classList.remove('active');
+                                        });
+                                        helpIcon.classList.toggle('active');
+                                    };
+
+                                    const tooltip = document.createElement('div');
+                                    tooltip.className = 'tooltip';
+                                    tooltip.textContent = meta.desc;
+
+                                    const container = document.createElement('div');
+                                    container.className = 'tooltip-container';
+                                    container.appendChild(helpIcon);
+                                    container.appendChild(tooltip);
+                                    td.appendChild(container);
+                                }
+                            } else {
+                                td.textContent = val;
+                            }
                             tr.appendChild(td);
                         });
                         tbody.appendChild(tr);
@@ -289,6 +378,10 @@
             }
             };
         });
+
+                                            window.onclick = () => {
+                                                document.querySelectorAll('.help-icon').forEach(h => h.classList.remove('active'));
+                                            };
 
             init();
     </script>

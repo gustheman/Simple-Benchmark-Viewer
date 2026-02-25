@@ -160,9 +160,18 @@ tr:last-child td {
     color: var(--accent);
 }
 
-.score-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
+.benchmark-name a,
+.benchmark-link {
+    color: var(--accent);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.benchmark-name a:hover,
+.benchmark-link:hover {
+    color: var(--accent-hover);
+    border-bottom: 1px solid var(--accent-hover);
 }
 
 .best-score {
@@ -318,4 +327,61 @@ tr:last-child td {
     max-height: 0;
     opacity: 0;
     margin-top: 0;
+}
+/* Tooltips */
+.help-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    background: var(--border);
+    color: var(--text-secondary);
+    border-radius: 50%;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-left: 8px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.help-icon:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip {
+    visibility: hidden;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--card-bg);
+    color: var(--text-primary);
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    width: 250px;
+    z-index: 1000;
+    font-size: 0.85rem;
+    font-weight: normal;
+    line-height: 1.4;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    text-transform: none;
+}
+
+.help-icon:hover+.tooltip,
+.help-icon.active+.tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }

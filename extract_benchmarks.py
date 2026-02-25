@@ -186,7 +186,9 @@ if __name__ == "__main__":
         "qwen_readme.md": {"owner": "Qwen3.5-397B-A17B", "name": "Qwen3.5-397B-A17B"},
         "glm5_readme.md": {"owner": "GLM-5", "name": "GLM-5"},
         "minimax_readme.md": {"owner": "MiniMax-M2.5", "name": "MiniMax-M2.5"},
-        "kimi_k2.5_readme.md": {"owner": "Kimi-K2.5", "name": "Kimi-K2.5"}
+        "kimi_k2.5_readme.md": {"owner": "Kimi-K2.5", "name": "Kimi-K2.5"},
+        "qwen3.5_122b_a10b_readme.md": {"owner": "Qwen3.5-122B-A10B", "name": "Qwen3.5-122B-A10B"},
+        "qwen3.5_35b_a3b_readme.md": {"owner": "Qwen3.5-35B-A3B", "name": "Qwen3.5-35B-A3B"}
     }
     
     results = {}
@@ -206,4 +208,8 @@ if __name__ == "__main__":
     with open('benchmarks.json', 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2)
     print("Results saved to benchmarks.json")
+
+    with open('benchmarks.js', 'w', encoding='utf-8') as f:
+        f.write(f"var rawData = {json.dumps(results, indent=2)};")
+    print("Results saved to benchmarks.js")
 
