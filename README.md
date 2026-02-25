@@ -19,6 +19,8 @@ A unified dashboard for comparing frontier AI models across language and vision 
 
 ## 🛠️ How to Update Data
 
+You can manually update the benchmarks following these steps, or use the automated **Skills** and **Workflows** provided (see below).
+
 1.  **Add/Update Readmes**: Place the Hugging Face model card content in `.md` files (e.g., `qwen_readme.md`).
 2.  **Extract Data**:
     ```bash
@@ -29,6 +31,11 @@ A unified dashboard for comparing frontier AI models across language and vision 
     python3 research_benchmarks.py
     ```
 4.  **Open Dashboard**: Open `index.html` in any browser.
+
+### 🤖 Agent Automation
+This repository includes a pre-defined **Skill** and **Workflow** for AI agents:
+- **Skill**: `.agent/skills/update_benchmarks/SKILL.md`
+- **Workflow**: `.agent/workflows/update_benchmarks.md`
 
 ## 📄 License
 
