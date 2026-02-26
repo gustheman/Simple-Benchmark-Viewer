@@ -29,6 +29,32 @@ body {
 header {
     margin-bottom: 60px;
     text-align: center;
+    position: relative;
+    }
+    
+    .github-link {
+        position: absolute;
+        top: -20px;
+        right: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .github-link:hover {
+        border-color: var(--accent);
+        background: var(--bg-color);
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+        transform: translateY(-2px);
 }
 
 h1 {

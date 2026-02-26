@@ -1,5 +1,7 @@
 # LLM Benchmark Universe 🌌
 
+[**Live Dashboard**](https://gustheman.github.io/Simple-Benchmark-Viewer/)
+
 A unified dashboard for comparing frontier AI models across language and vision benchmarks. This project extracts, normalizes, and visualizes benchmark data from official Hugging Face model cards to provide a clear, side-by-side comparison of model capabilities.
 
 ## 🚀 Features
