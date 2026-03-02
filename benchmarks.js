@@ -1,4 +1,670 @@
 var rawData = {
+  "Qwen3.5-0.8B": [
+    [
+      {
+        "": "MMLU-Pro",
+        "Qwen3-4B-2507": "69.6",
+        "Qwen3-1.7B": "40.2",
+        "Qwen3.5-2B": "55.3",
+        "Qwen3.5-0.8B": "29.7",
+        "__benchmark": "MMLU-Pro",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMLU-Redux",
+        "Qwen3-4B-2507": "84.2",
+        "Qwen3-1.7B": "64.4",
+        "Qwen3.5-2B": "69.2",
+        "Qwen3.5-0.8B": "48.5",
+        "__benchmark": "MMLU-Redux",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "C-Eval",
+        "Qwen3-4B-2507": "80.2",
+        "Qwen3-1.7B": "61.0",
+        "Qwen3.5-2B": "65.2",
+        "Qwen3.5-0.8B": "46.4",
+        "__benchmark": "C-Eval",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "SuperGPQA",
+        "Qwen3-4B-2507": "42.8",
+        "Qwen3-1.7B": "21.0",
+        "Qwen3.5-2B": "30.4",
+        "Qwen3.5-0.8B": "16.9",
+        "__benchmark": "SuperGPQA",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "IFEval",
+        "Qwen3-4B-2507": "83.4",
+        "Qwen3-1.7B": "68.2",
+        "Qwen3.5-2B": "61.2",
+        "Qwen3.5-0.8B": "52.1",
+        "__benchmark": "IFEval",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMMLU",
+        "Qwen3-4B-2507": "64.9",
+        "Qwen3-1.7B": "46.7",
+        "Qwen3.5-2B": "56.9",
+        "Qwen3.5-0.8B": "34.1",
+        "__benchmark": "MMLU",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMLU-Pro",
+        "Qwen3-4B-2507": "74.0",
+        "Qwen3-1.7B": "56.5",
+        "Qwen3.5-2B": "66.5",
+        "Qwen3.5-0.8B": "42.3",
+        "__benchmark": "MMLU-Pro",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMLU-Redux",
+        "Qwen3-4B-2507": "86.1",
+        "Qwen3-1.7B": "73.9",
+        "Qwen3.5-2B": "79.6",
+        "Qwen3.5-0.8B": "59.5",
+        "__benchmark": "MMLU-Redux",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "C-Eval",
+        "Qwen3-4B-2507": "82.2",
+        "Qwen3-1.7B": "68.1",
+        "Qwen3.5-2B": "73.2",
+        "Qwen3.5-0.8B": "50.5",
+        "__benchmark": "C-Eval",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "SuperGPQA",
+        "Qwen3-4B-2507": "47.8",
+        "Qwen3-1.7B": "31.2",
+        "Qwen3.5-2B": "37.5",
+        "Qwen3.5-0.8B": "21.3",
+        "__benchmark": "SuperGPQA",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "GPQA",
+        "Qwen3-4B-2507": "65.8",
+        "Qwen3-1.7B": "40.1",
+        "Qwen3.5-2B": "51.6",
+        "Qwen3.5-0.8B": "11.9",
+        "__benchmark": "GPQA",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "IFEval",
+        "Qwen3-4B-2507": "87.4",
+        "Qwen3-1.7B": "72.5",
+        "Qwen3.5-2B": "78.6",
+        "Qwen3.5-0.8B": "44.0",
+        "__benchmark": "IFEval",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "IFBench",
+        "Qwen3-4B-2507": "50.4",
+        "Qwen3-1.7B": "26.7",
+        "Qwen3.5-2B": "41.3",
+        "Qwen3.5-0.8B": "21.0",
+        "__benchmark": "IFBench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MultiChallenge",
+        "Qwen3-4B-2507": "41.7",
+        "Qwen3-1.7B": "27.2",
+        "Qwen3.5-2B": "33.7",
+        "Qwen3.5-0.8B": "18.9",
+        "__benchmark": "Multi-Challenge",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "AA-LCR",
+        "Qwen3-4B-2507": "32.0",
+        "Qwen3-1.7B": "6.7",
+        "Qwen3.5-2B": "25.6",
+        "Qwen3.5-0.8B": "4.7",
+        "__benchmark": "AA-LCR",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "LongBench v2",
+        "Qwen3-4B-2507": "42.8",
+        "Qwen3-1.7B": "26.5",
+        "Qwen3.5-2B": "38.7",
+        "Qwen3.5-0.8B": "26.1",
+        "__benchmark": "LongBench v2",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "HMMT Feb 25",
+        "Qwen3-4B-2507": "57.5",
+        "Qwen3-1.7B": "10.2",
+        "Qwen3.5-2B": "22.9",
+        "Qwen3.5-0.8B": "--",
+        "__benchmark": "HMMT 2025 (Feb)",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "HMMT Nov 25",
+        "Qwen3-4B-2507": "69.6",
+        "Qwen3-1.7B": "8.9",
+        "Qwen3.5-2B": "19.6",
+        "Qwen3.5-0.8B": "--",
+        "__benchmark": "HMMT 2025 (Nov)",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "BFCL-V4",
+        "Qwen3-4B-2507": "39.9",
+        "Qwen3-1.7B": "--",
+        "Qwen3.5-2B": "43.6",
+        "Qwen3.5-0.8B": "25.3",
+        "__benchmark": "BFCL-V4",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "TAU2-Bench",
+        "Qwen3-4B-2507": "43.2",
+        "Qwen3-1.7B": "--",
+        "Qwen3.5-2B": "48.8",
+        "Qwen3.5-0.8B": "11.6",
+        "__benchmark": "TAU2-Bench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMMLU",
+        "Qwen3-4B-2507": "70.8",
+        "Qwen3-1.7B": "57.0",
+        "Qwen3.5-2B": "63.1",
+        "Qwen3.5-0.8B": "44.3",
+        "__benchmark": "MMLU",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMLU-ProX",
+        "Qwen3-4B-2507": "62.4",
+        "Qwen3-1.7B": "49.4",
+        "Qwen3.5-2B": "52.3",
+        "Qwen3.5-0.8B": "34.6",
+        "__benchmark": "MMLU-ProX",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "NOVA-63",
+        "Qwen3-4B-2507": "47.1",
+        "Qwen3-1.7B": "40.3",
+        "Qwen3.5-2B": "46.4",
+        "Qwen3.5-0.8B": "42.4",
+        "__benchmark": "NOVA-63",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "INCLUDE",
+        "Qwen3-4B-2507": "64.4",
+        "Qwen3-1.7B": "51.8",
+        "Qwen3.5-2B": "55.4",
+        "Qwen3.5-0.8B": "40.6",
+        "__benchmark": "INCLUDE",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "Global PIQA",
+        "Qwen3-4B-2507": "73.5",
+        "Qwen3-1.7B": "63.1",
+        "Qwen3.5-2B": "69.3",
+        "Qwen3.5-0.8B": "59.4",
+        "__benchmark": "Global PIQA",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "PolyMATH",
+        "Qwen3-4B-2507": "46.2",
+        "Qwen3-1.7B": "25.2",
+        "Qwen3.5-2B": "26.1",
+        "Qwen3.5-0.8B": "8.2",
+        "__benchmark": "PolyMATH",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "WMT24++",
+        "Qwen3-4B-2507": "58.9",
+        "Qwen3-1.7B": "39.3",
+        "Qwen3.5-2B": "45.8",
+        "Qwen3.5-0.8B": "27.2",
+        "__benchmark": "WMT24++",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MAXIFE",
+        "Qwen3-4B-2507": "72.1",
+        "Qwen3-1.7B": "50.7",
+        "Qwen3.5-2B": "60.6",
+        "Qwen3.5-0.8B": "39.2",
+        "__benchmark": "IFEval",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      }
+    ],
+    [
+      {
+        "": "MMMU",
+        "Qwen3-VL-4B": "70.8",
+        "Qwen3-VL-2B": "61.4",
+        "Qwen3.5-2B": "64.2/64.2",
+        "Qwen3.5-0.8B": "49/47.4",
+        "__benchmark": "MMMU",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMMU-Pro",
+        "Qwen3-VL-4B": "57.0",
+        "Qwen3-VL-2B": "42.5",
+        "Qwen3.5-2B": "50.3/47.7",
+        "Qwen3.5-0.8B": "31.2/31.4",
+        "__benchmark": "MMMU-Pro",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "Mathvista(mini)",
+        "Qwen3-VL-4B": "79.5",
+        "Qwen3-VL-2B": "73.6",
+        "Qwen3.5-2B": "76.7/73.9",
+        "Qwen3.5-0.8B": "62.2/58.6",
+        "__benchmark": "MathVista (mini)",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "DynaMath",
+        "Qwen3-VL-4B": "74.4",
+        "Qwen3-VL-2B": "66.7",
+        "Qwen3.5-2B": "73.6/69.6",
+        "Qwen3.5-0.8B": "49.9/46.5",
+        "__benchmark": "DynaMath",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "ZEROBench",
+        "Qwen3-VL-4B": "0.0",
+        "Qwen3-VL-2B": "0.0",
+        "Qwen3.5-2B": "1.0/0.0",
+        "Qwen3.5-0.8B": "0.0/0.0",
+        "__benchmark": "ZeroBench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "ZEROBench_sub",
+        "Qwen3-VL-4B": "18.9",
+        "Qwen3-VL-2B": "13.2",
+        "Qwen3.5-2B": "17.1/18.6",
+        "Qwen3.5-0.8B": "12.9/11.4",
+        "__benchmark": "ZeroBench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "VlmsAreBlind",
+        "Qwen3-VL-4B": "68.6",
+        "Qwen3-VL-2B": "50.0",
+        "Qwen3.5-2B": "75.8/74.3",
+        "Qwen3.5-0.8B": "59.4/57.3",
+        "__benchmark": "VlmsAreBlind",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "RealWorldQA",
+        "Qwen3-VL-4B": "73.2",
+        "Qwen3-VL-2B": "69.5",
+        "Qwen3.5-2B": "74.5/71.2",
+        "Qwen3.5-0.8B": "63.4/61.6",
+        "__benchmark": "RealWorldQA",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMStar",
+        "Qwen3-VL-4B": "73.2",
+        "Qwen3-VL-2B": "68.1",
+        "Qwen3.5-2B": "71.7/68.0",
+        "Qwen3.5-0.8B": "58.3/55.9",
+        "__benchmark": "MMStar",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMBenchEN-DEV-v1.1",
+        "Qwen3-VL-4B": "86.7",
+        "Qwen3-VL-2B": "81.9",
+        "Qwen3.5-2B": "83.3/81.3",
+        "Qwen3.5-0.8B": "69.9/68.0",
+        "__benchmark": "MMBenchEN-DEV-v1.1",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "SimpleVQA",
+        "Qwen3-VL-4B": "48.8",
+        "Qwen3-VL-2B": "43.6",
+        "Qwen3.5-2B": "38.5/39.5",
+        "Qwen3.5-0.8B": "31.3/30.4",
+        "__benchmark": "SimpleVQA",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "HallusionBench",
+        "Qwen3-VL-4B": "64.1",
+        "Qwen3-VL-2B": "54.9",
+        "Qwen3.5-2B": "58.0/51.3",
+        "Qwen3.5-0.8B": "53.1/46.7",
+        "__benchmark": "HallusionBench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMLongBench-Doc",
+        "Qwen3-VL-4B": "44.4",
+        "Qwen3-VL-2B": "33.8",
+        "Qwen3.5-2B": "45.4/38.8",
+        "Qwen3.5-0.8B": "33.6/28.1",
+        "__benchmark": "MMLongBench-Doc",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "AI2D_TEST",
+        "Qwen3-VL-4B": "84.9",
+        "Qwen3-VL-2B": "80.4",
+        "Qwen3.5-2B": "83.3/81.5",
+        "Qwen3.5-0.8B": "69.9/68.7",
+        "__benchmark": "AI2D",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "CC-OCR",
+        "Qwen3-VL-4B": "73.8",
+        "Qwen3-VL-2B": "68.3",
+        "Qwen3.5-2B": "72.9/75.8",
+        "Qwen3.5-0.8B": "63.2/66.7",
+        "__benchmark": "CC-OCR",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "OmniDocBench1.5",
+        "Qwen3-VL-4B": "80.0",
+        "Qwen3-VL-2B": "65.9",
+        "Qwen3.5-2B": "79.8/80.9",
+        "Qwen3.5-0.8B": "61.0/70.6",
+        "__benchmark": "OmniDocBench 1.5",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "CharXiv(RQ)",
+        "Qwen3-VL-4B": "50.3",
+        "Qwen3-VL-2B": "37.1",
+        "Qwen3.5-2B": "58.8/52.6",
+        "Qwen3.5-0.8B": "41.3/38.2",
+        "__benchmark": "CharXiv",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "OCRBench",
+        "Qwen3-VL-4B": "80.8",
+        "Qwen3-VL-2B": "79.2",
+        "Qwen3.5-2B": "84.5/85.4",
+        "Qwen3.5-0.8B": "74.5/79.1",
+        "__benchmark": "OCRBench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "RefCOCO(avg)",
+        "Qwen3-VL-4B": "88.2",
+        "Qwen3-VL-2B": "84.8",
+        "Qwen3.5-2B": "84.8/84.3",
+        "Qwen3.5-0.8B": "79.3/77.8",
+        "__benchmark": "RefCOCO",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "CountBench",
+        "Qwen3-VL-4B": "89.4",
+        "Qwen3-VL-2B": "84.1",
+        "Qwen3.5-2B": "91.4/86.8",
+        "Qwen3.5-0.8B": "77.0/68.6",
+        "__benchmark": "CountBench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "ODInW13",
+        "Qwen3-VL-4B": "39.4",
+        "Qwen3-VL-2B": "36.0",
+        "Qwen3.5-2B": "35.9/40.5",
+        "Qwen3.5-0.8B": "31.6/33.2",
+        "__benchmark": "ODInW13",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "ERQA",
+        "Qwen3-VL-4B": "47.3",
+        "Qwen3-VL-2B": "41.8",
+        "Qwen3.5-2B": "43.8/33.0",
+        "Qwen3.5-0.8B": "34.5/23.8",
+        "__benchmark": "ERQA",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "EmbSpatialBench",
+        "Qwen3-VL-4B": "80.7",
+        "Qwen3-VL-2B": "75.9",
+        "Qwen3.5-2B": "77.9/66.4",
+        "Qwen3.5-0.8B": "68.6/54.6",
+        "__benchmark": "EmbSpatialBench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "RefSpatialBench",
+        "Qwen3-VL-4B": "45.3",
+        "Qwen3-VL-2B": "28.9",
+        "Qwen3.5-2B": "32.9/30.0",
+        "Qwen3.5-0.8B": "23.5/21.7",
+        "__benchmark": "RefSpatialBench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "Hypersim",
+        "Qwen3-VL-4B": "11.9",
+        "Qwen3-VL-2B": "11.2",
+        "Qwen3.5-2B": "12.4/12.4",
+        "Qwen3.5-0.8B": "11.9/11.0",
+        "__benchmark": "Hypersim",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "SUNRGBD",
+        "Qwen3-VL-4B": "28.0",
+        "Qwen3-VL-2B": "28.6",
+        "Qwen3.5-2B": "28.7/25.6",
+        "Qwen3.5-0.8B": "26.1/23.3",
+        "__benchmark": "SUNRGBD",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "Nuscene",
+        "Qwen3-VL-4B": "4.9",
+        "Qwen3-VL-2B": "4.0",
+        "Qwen3.5-2B": "6.9/8.5",
+        "Qwen3.5-0.8B": "5.7/7.0",
+        "__benchmark": "NuScenes",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "VideoMME(w sub.)",
+        "Qwen3-VL-4B": "76.0",
+        "Qwen3-VL-2B": "67.9",
+        "Qwen3.5-2B": "75.6/--",
+        "Qwen3.5-0.8B": "63.8/--",
+        "__benchmark": "VideoMME",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "VideoMME(w/o sub.)",
+        "Qwen3-VL-4B": "68.9",
+        "Qwen3-VL-2B": "62.1",
+        "Qwen3.5-2B": "69.0/--",
+        "Qwen3.5-0.8B": "57.7/--",
+        "__benchmark": "VideoMME",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "VideoMMMU",
+        "Qwen3-VL-4B": "69.4",
+        "Qwen3-VL-2B": "54.1",
+        "Qwen3.5-2B": "62.1/--",
+        "Qwen3.5-0.8B": "44.3/--",
+        "__benchmark": "VideoMMMU",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MLVU",
+        "Qwen3-VL-4B": "75.7",
+        "Qwen3-VL-2B": "69.2",
+        "Qwen3.5-2B": "76.2/--",
+        "Qwen3.5-0.8B": "65.6/--",
+        "__benchmark": "MLVU",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MVBench",
+        "Qwen3-VL-4B": "69.3",
+        "Qwen3-VL-2B": "64.5",
+        "Qwen3.5-2B": "64.9/--",
+        "Qwen3.5-0.8B": "55.8/--",
+        "__benchmark": "MVBench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "LVBench",
+        "Qwen3-VL-4B": "53.5",
+        "Qwen3-VL-2B": "47.6",
+        "Qwen3.5-2B": "57.1/--",
+        "Qwen3.5-0.8B": "45.1/--",
+        "__benchmark": "LVBench",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MMVU",
+        "Qwen3-VL-4B": "58.6",
+        "Qwen3-VL-2B": "48.9",
+        "Qwen3.5-2B": "48.6/--",
+        "Qwen3.5-0.8B": "34.3/--",
+        "__benchmark": "MMVU",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "ScreenSpot Pro",
+        "Qwen3-VL-4B": "59.5",
+        "Qwen3-VL-2B": "48.5",
+        "Qwen3.5-2B": "--/54.5",
+        "Qwen3.5-0.8B": "--/46.5",
+        "__benchmark": "ScreenSpot Pro",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "SLAKE",
+        "Qwen3-VL-4B": "65.9",
+        "Qwen3-VL-2B": "61.1",
+        "Qwen3.5-2B": "74.4/67.5",
+        "Qwen3.5-0.8B": "62.6/59.5",
+        "__benchmark": "SLAKE",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "PMC-VQA",
+        "Qwen3-VL-4B": "48.4",
+        "Qwen3-VL-2B": "42.4",
+        "Qwen3.5-2B": "48.8/54.0",
+        "Qwen3.5-0.8B": "40.4/45.5",
+        "__benchmark": "PMC-VQA",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      },
+      {
+        "": "MedXpertQA-MM",
+        "Qwen3-VL-4B": "26.3",
+        "Qwen3-VL-2B": "13.0",
+        "Qwen3.5-2B": "26.9/19.1",
+        "Qwen3.5-0.8B": "17.1/25.3",
+        "__benchmark": "MedXpertQA-MM",
+        "__owner": "Qwen3.5-0.8B",
+        "__official_name": "Qwen3.5-0.8B"
+      }
+    ]
+  ],
   "DeepSeek-V3": [
     [
       {
