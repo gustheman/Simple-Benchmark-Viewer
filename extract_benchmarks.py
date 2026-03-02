@@ -190,7 +190,8 @@ if __name__ == "__main__":
         "qwen3.5_122b_a10b_readme.md": {"owner": "Qwen3.5-122B-A10B", "name": "Qwen3.5-122B-A10B"},
         "qwen3.5_35b_a3b_readme.md": {"owner": "Qwen3.5-35B-A3B", "name": "Qwen3.5-35B-A3B"},
         "qwen3.5_9b_readme.md": {"owner": "Qwen3.5-9B", "name": "Qwen3.5-9B"},
-        "qwen3.5_0.8b_readme.md": {"owner": "Qwen3.5-0.8B", "name": "Qwen3.5-0.8B"}
+        "qwen3.5_0.8b_readme.md": {"owner": "Qwen3.5-0.8B", "name": "Qwen3.5-0.8B"},
+        "qwen3.5_2b_readme.md": {"owner": "Qwen3.5-2B", "name": "Qwen3.5-2B"}
     }
     
     results = {}
