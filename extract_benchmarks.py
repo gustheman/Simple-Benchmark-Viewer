@@ -188,7 +188,8 @@ if __name__ == "__main__":
         "minimax_readme.md": {"owner": "MiniMax-M2.5", "name": "MiniMax-M2.5"},
         "kimi_k2.5_readme.md": {"owner": "Kimi-K2.5", "name": "Kimi-K2.5"},
         "qwen3.5_122b_a10b_readme.md": {"owner": "Qwen3.5-122B-A10B", "name": "Qwen3.5-122B-A10B"},
-        "qwen3.5_35b_a3b_readme.md": {"owner": "Qwen3.5-35B-A3B", "name": "Qwen3.5-35B-A3B"}
+        "qwen3.5_35b_a3b_readme.md": {"owner": "Qwen3.5-35B-A3B", "name": "Qwen3.5-35B-A3B"},
+        "qwen3.5_9b_readme.md": {"owner": "Qwen3.5-9B", "name": "Qwen3.5-9B"}
     }
     
     results = {}
